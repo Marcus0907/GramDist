@@ -13,7 +13,7 @@ def list_all_dict(s):
         dict={}
         for key in res[i]:
             dict[key] = dict.get(key,0)+1
-        dict_last = {i:dict[i] for i in dict if dict[i]>1}
+        dict_last = {i:dict[i] for i in dict if dict[i]>2}
         if dict_last:
             result.append(dict_last)
     return result
@@ -42,10 +42,14 @@ def closed_pattern(result_all):
 
 
 seq = []
-with open('Training-New/Gram-negative-1591-Train.txt','r') as f:
+with open('Training-New/Gram-positive-576-Train.txt','r') as f:
     content = f.readlines()
     for each in content:
+        if each == " " or each == "\n":
+            continue
         seq.append(each.strip('\n'))
+
+flag = 0
 for i in seq:
     id = i.split(',')[0]
     x = i.split(',')[1]
@@ -54,9 +58,9 @@ for i in seq:
     pattren_results = []
     result_all = list_all_dict(x)
     last = closed_pattern(result_all)
-    print(last[1::])
+    # print(last[1::])
 
-    print(x+i.split(',')[0])
+    # print(x+i.split(',')[0])
 
     concatnate_id = str(id)+'#'+str(x)+'#'
     concatnate_list = []
@@ -66,13 +70,15 @@ for i in seq:
                 concatnate_list.append(str(key)+'_'+str(i[key]))
     concatnate_str = ','.join(concatnate_list)
     concatnate_result = concatnate_id+concatnate_str
-    print(concatnate_result)
-    files = open('Gram-negative-1591-Train_ClosedPatterns.txt','a',encoding="utf-8")
+    # print(concatnate_result)
+    print(flag)
+    files = open('Gram-positive-576-Train_ClosedPatterns.txt','a+',encoding="utf-8")
     files.write(concatnate_result+'\n')
+    flag += 1
 
     for i in concatnate_list:
-        print(i)
-        file = open('Gram-negative-1591-Train_Patterns.txt','a',encoding="utf-8")
+        # print(i)
+        file = open('Gram-positive-576-Train_Patterns.txt','a+',encoding="utf-8")
         file.write(i+'\n')
 files.close()
 file.close()

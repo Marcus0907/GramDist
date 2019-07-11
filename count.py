@@ -19,7 +19,7 @@ def count(pattern_list):
 
 
 pattern_list= []
-with open('pattren_test.txt')as file:
+with open('Gram-positive-576-Train_Patterns.txt')as file:
     lines = file.readlines()
     for i in lines:
         pattern = i.strip("\n")
@@ -29,9 +29,12 @@ with open('pattren_test.txt')as file:
 
 # print(pattern_list)
 last_closedpattern = count(pattern_list)
-file = open('Last_test.txt','a',encoding="utf-8")
+file = open('Gram-positive-576-Train_Last_Patterns.txt','a',encoding="utf-8")
+flag = 0
 for i in last_closedpattern:
     file.write(str(i)+last_closedpattern[i]+"\n")
+    print(flag)
+    flag += 1
     # print(str(i)+last_closedpattern[i])
 file.close()
 # last_pattren = count(pattern_list)
